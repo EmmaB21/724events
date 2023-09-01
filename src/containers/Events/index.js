@@ -14,6 +14,7 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  // ajout de la méthode filtre pour les catégories
   const filteredEvents = ((!type ? data?.events : data?.events.filter((event) =>
     event.type === type)) || []).filter((event, index) => {
       if (
@@ -28,10 +29,12 @@ const EventList = () => {
     setCurrentPage(1);
     setType(evtType);
   };
-  const pageNumber = Math.ceil ((filteredEvents?.length || 0) / PER_PAGE) + 1;
+  // modif de la méthode math floor=>ceil pour affichage page2 (10cartes)
+  const pageNumber = Math.ceil((filteredEvents?.length || 0) / PER_PAGE) + 1;
   const typeList = new Set(data?.events.map((event) => event.type));
   return (
     <>
+      {/* modif de la gestion de l'erreur */}
       {error === null ? "" : (<div>An error occured</div>)}
       {data === null ? (
         "loading"
@@ -63,6 +66,7 @@ const EventList = () => {
               <a key={n}
                 href="#events"
                 onClick={() => setCurrentPage(n + 1)}
+                // ajout classe css pour mettre la page courante en gras
                 className={n + 1 === currentPage ? "activePage" : ""}
               >
                 {n + 1}

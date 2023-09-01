@@ -7,6 +7,7 @@ describe("When Events is created", () => {
     await screen.findByText("Email");
     await screen.findByText("Nom");
     await screen.findByText("Prénom");
+    // Correction orthographe "Personel"
     await screen.findByText("Personnel / Entreprise");
   });
 

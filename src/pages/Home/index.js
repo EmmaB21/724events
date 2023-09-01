@@ -13,7 +13,9 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
+  // modif récupération des données (useData renvoie data)
   const { data } = useData();
+  // fonction last trie les évts pour avoir l'évt le plus récent
   const last =
     data?.events.sort((evtA, evtB) =>
       new Date(evtA.date) < new Date(evtB.date) ? 1 : -1)[0];
@@ -26,6 +28,7 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
+      {/* Ajout id nos-services pour liens navbar */}
       <section className="ServicesContainer" id="nos-services">
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
@@ -55,10 +58,12 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
+       {/* Ajout id nos-realisations pour liens navbar */}
       <section className="EventsContainer" id="nos-realisations" data-testid="events-list">
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
+       {/* Ajout id notre-equipe pour liens navbar */}
       <section className="PeoplesContainer" id="notre-equipe" data-testid="people-list">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
@@ -120,6 +125,7 @@ const Page = () => {
     <footer className="row" data-testid="footer">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {/* ajout condition pour gestion erreur props console (pb async) */}
         {data === null ? ("loading") : (
         <EventCard
           data-testid="last-event-card"
@@ -127,6 +133,7 @@ const Page = () => {
           title={last?.title}
           date={new Date(last?.date)}
           small
+          // modif contenu label
           label={last?.type}
         />)}
       </div>

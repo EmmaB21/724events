@@ -45,6 +45,7 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
+    // ajout findAllByText pour tester plusieurs cartes
     await screen.findAllByText("avril");
   });
   describe("and an error occured", () => {
@@ -59,6 +60,7 @@ describe("When Events is created", () => {
     });
   });
   describe("and we select a category", () => {
+    // Suppression .only pour ne pas avoir de tests "skipped"
     it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(

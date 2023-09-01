@@ -4,6 +4,7 @@ import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
+// modif du Timeout pour régler le fail du test sur Text "Envoyer" (pb async)
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 600); })
 
 const Form = ({ onSuccess, onError }) => {
@@ -16,6 +17,7 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        // Ajout onSuccess pour ouvrir modale de confirmation si succès
         onSuccess();
       } catch (err) {
         setSending(false);
@@ -31,6 +33,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field placeholder="" label="Nom" />
           <Field placeholder="" label="Prénom" />
           <Select
+          // Correction orthographe "Personel"
             selection={["Personnel", "Entreprise"]}
             onChange={() => null}
             label="Personnel / Entreprise"
